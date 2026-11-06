@@ -1,0 +1,901 @@
+/*=================================================================
+                       CONFIGURACIÓN GENERAL
+=================================================================*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 2. Scroll suave que mencionamos antes para cuando hagas clic en el logo */
+html {
+    scroll-behavior: smooth;
+}
+
+/*=================================================================
+                       HEADER Y CONTENEDOR PRINCIPAL
+=================================================================*/
+
+header{        
+    /* Definimos el color del fonfo en blanco */
+    background-color: #ffffff; 
+    /* Vamos a dejar el contenedor header flexible y sus elementos */
+    display: flex;
+    /* Centrar el texto */
+    text-align: center;
+    /* Justificar  elementos del contenedor*/
+    justify-content: space-between;
+    /* Espaciado interno para que no quede pegado al borde */
+    padding: 15px 30px;
+    flex-wrap: nowrap;         /* Obliga a que el header no se divida en varias filas */
+    
+    /* Puse este borde para identificar el contenedor */
+    /* border: 3px solid #f05c06;                */
+}
+
+/* CLAVE 1: Alineación del enlace del logo */
+header > a {
+    display: flex;             /* Convierte el enlace en flexbox para eliminar el desfase vertical */
+    align-items: center;       
+}
+
+/* Logo del encabezado */
+header img{
+    /* Ancho de la imagen */
+    width: 160px; 
+    /* ALto de la imagen */
+    height: auto;
+    display: block;            /* Elimina el espacio extra inferior de la imagen */
+}
+
+/*=================================================================
+                      MENÚ DE NAVEGACIÓN Y LISTA DENTRO DE HEADER
+=================================================================*/
+.menu-navegacion ul{
+    list-style: none; /* Elimina los puntos de la lista */
+    display: flex;     /* Pone los elementos en fila horizontal */
+    align-items: center; /* Centra los elementos verticalmente */
+    flex-wrap: nowrap;         /* Fuerza a que todos los ítems del menú vayan en una sola línea */
+    gap: 15px;         /* Espacio de separación entre cada opción del menú */
+    margin: 0;                 /* ¡Eliminamos el margen por defecto del navegador! */
+    padding: 0;                /* ¡Eliminamos el relleno por defecto del navegador! */
+}
+
+.menu-navegacion a{
+    text-decoration: none; /* Elimina subrayados */
+    color: #1a365d;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    position: relative;    /* Necesario para posicionar el efecto de subrayado */
+    white-space: nowrap;       /* CLAVE: Evita que "Soluciones empresariales" se parta en dos líneas */
+    transition: color 0.3s ease; /* Transición suave si cambia de color */
+}
+
+/* Efecto Hover: Subrayado directo de una sola vez */
+.menu-navegacion a:hover {
+    border-bottom: 1px solid #1a365d; /* Dibuja la línea de inmediato bajo el texto */
+}
+
+/* --- 6. FLECHITAS DE LOS MENÚS DESPLEGABLES --- */
+.menu-navegacion .flecha {
+    font-size: 15px;      /* Tamaño pequeño y elegante */
+    margin-left: 1px;     /* Separación respecto al texto */
+    display: inline-block;
+    transition: transform 0.3s ease; /* Por si luego queremos que gire al abrir */
+}
+
+/* --- 7. PANELES DESPLEGABLES --- */
+/* Contenedor principal del menú desplegable (oculto por defecto) */
+.menu-item-desplegable {
+    position: relative; /* Permite posicionar el panel en relación a este li */
+}
+
+.panel-desplegable {
+    display: none;       /* Oculto inicialmente */
+    position: absolute;  /* Se posiciona flotando debajo del menú */
+    top: 100%;           /* Justo debajo del enlace principal */
+    left: 0;
+    background-color: #ffffff; /* Fondo blanco para el recuadro */
+    min-width: 200px;    /* Ancho mínimo del panel */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Sombra sutil y profesional */
+    border-radius: 4px;  /* Bordes ligeramente redondeados */
+    padding: 10px 0;     /* Espaciado interno superior e inferior */
+    z-index: 100;        /* Asegura que pase por encima de otros elementos */
+}
+
+/* Estilos de los enlaces internos del panel */
+.panel-desplegable a {
+    display: block;      
+    padding: 10px 20px;  
+    color: #1a365d;      
+    font-size: 14px;
+    white-space: nowrap; 
+    border-bottom: none; 
+}
+
+.panel-desplegable a:hover {
+    background-color: #f0f4f8; 
+    border-bottom: none;       
+}
+
+/* Cuando el item tenga la clase 'activo', el panel se muestra */
+.menu-item-desplegable.activo .panel-desplegable {
+    display: block;
+}
+
+/* Cuando el item tenga la clase 'activo', la flechita gira 180 grados */
+.menu-item-desplegable.activo .flecha {
+    transform: rotate(180deg);
+}
+
+/* --- 8. BOTÓN TRABAJA CON NOSOTROS --- */
+.menu-navegacion .boton-trabaja {
+    background-color: #f05c06; /* Color de fondo azul institucional */
+    color: #ffffff;            /* Texto blanco para que contraste */
+    padding: 8px 14px;        /* Espaciado interno para darle forma de botón */
+    border-radius: 20px;        /* Bordes ligeramente redondeados */
+    font-size: 13px;
+    font-weight: 600;          /* Texto un poco más marcado */
+    white-space: nowrap;       /* Evita que el texto de "Trabaja con nosotros" se baje de línea */
+    display: inline-block;
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+}
+
+/* Efecto hover específico para el botón (se aclara o cambia ligeramente) */
+.menu-navegacion .boton-trabaja:hover {    
+    border-bottom: 0px solid #ffffff !important; /* El !important asegura que no lo bloquee otra regla */
+}
+
+/*=================================================================
+                      SUB MENÚ INSTITUCIONAL
+=================================================================*/
+.submenu-institucional {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alinea los elementos hacia la derecha como en el diseño */
+    padding: 12px 40px;    
+    gap: 30px;
+}
+
+.submenu-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.submenu-links a {
+    text-decoration: none;
+    color: #1a365d; /* Color azul institucional */
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 600; /* Un poco más marcado para resaltar las secciones */
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.submenu-links a:hover {
+    color: #f05c06; /* Cambia al tono naranja institucional al pasar el mouse */
+}
+
+/* --- BOTÓN DE BÚSQUEDA CIRCULAR --- */
+.btn-busqueda {
+    background-color: #f05c06; /* Color naranja institucional */
+    border: none;
+    border-radius: 50%;       /* Lo vuelve completamente circular */
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;            /* Color del icono de la lupa */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-busqueda:hover {
+    background-color: #d95305; /* Un naranja un poco más oscuro al pasar el cursor */
+    transform: scale(1.05);    /* Efecto de zoom sutil */
+}
+
+/*=================================================================
+                      HOME
+=================================================================*/
+
+.home-principal {
+    background: linear-gradient(135deg, #00233b 0%, #1a365d 100%);
+    color: #ffffff;
+    padding: 50px 60px 40px 60px;
+    font-family: sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.home-principal {
+    background: linear-gradient(135deg, #00233b 0%, #1a365d 50%, #1a365d 100%);
+    color: #ffffff;
+    padding: 70px 60px 50px 80px; /* Padding amplio para darle más altura */
+    min-height: 85vh;             /* Ocupa el 85% del alto de la pantalla */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* --- BOTÓN VERTICAL LATERAL (RADIO) --- */
+.btn-radio-lateral {
+    position: fixed; /* Mantiene el botón pegado a la pantalla siempre */
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #581c87; /* Tono morado institucional */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 8px;
+    border-radius: 0 12px 12px 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Asegura que quede siempre por encima del contenido */
+}
+
+.btn-radio-lateral:hover {
+    background-color: #581c87;
+}
+
+/* --- CONTENIDO INTERNO --- */
+.home-contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.home-texto {
+    max-width: 580px;
+}
+
+.subtitulo-estudia {
+    color: #00bcd4;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.home-texto h1 {
+    font-size: 46px;
+    font-weight: 800;
+    margin: 4px 0 12px 0;
+}
+
+.snies-info {
+    font-size: 13px;
+    color: #cbd5e1;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.info-detalles p {
+    font-size: 14.5px;
+    color: #e2e8f0;
+    margin-bottom: 6px;
+}
+
+/* --- BOTONES DE ACCIÓN --- */
+.home-botones {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-plan {
+    background-color: #00bcd4;
+    color: #0b1d3a;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-plan .flecha-abajo {
+    background-color: #f05c06;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.btn-tarifa {
+    background-color: #f05c06;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/*=================================================================
+             TARJETAS DE PRECIOS Y COSTOS (INFERIOR)
+=================================================================*/
+.contenedor-tarjetas-precios {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.tarjeta-precio {
+    background: linear-gradient(180deg, #16325c 0%, #0d213f 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 25px 30px 20px 30px;
+    width: 420px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.tarjeta-precio:hover {
+    transform: translateY(-5px);
+    border-color: #00bcd4;
+}
+
+/* Ícono circular superior centrado */
+.badge-icono {
+    background: linear-gradient(135deg, #f05c06, #6b21a8);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -45px auto 12px auto; /* Lo eleva sobre el borde superior de la tarjeta */
+    border: 3px solid #0d2847;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+/* Títulos y precios */
+.titulo-tarjeta {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.precio-monto {
+    font-size: 40px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 2px 0;
+}
+
+.subtexto-semestre {
+    display: block;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 18px;
+}
+
+/* Texto explicativo inferior con separación */
+.detalle-descuento {
+    font-size: 12.5px;
+    color: #cbd5e1;
+    line-height: 1.4;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 12px;
+    margin: 0;
+}
+
+/*=================================================================
+                 SECCIÓN FORMULARIO "DÉJANOS TUS DATOS"
+=================================================================*/
+.seccion-contacto {
+    background-color: #ffffff;
+    padding: 60px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 2px solid #e2e8f0; /* ¡Esta línea crea el separador inferior! */
+}
+
+.seccion-contacto h2 {
+    color: #1a365d;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 35px;
+}
+
+.formulario-datos {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.fila-form {
+    display: flex;
+    gap: 15px;
+}
+
+.fila-2-col input {
+    flex: 1;
+}
+
+.fila-4-col input,
+.fila-4-col select {
+    flex: 1;
+    width: 100%;
+}
+
+/* Estilo de los Inputs y Selects con bordes redondeados */
+.formulario-datos input[type="text"],
+.formulario-datos input[type="email"],
+.formulario-datos input[type="tel"],
+.formulario-datos select {
+    padding: 12px 18px;
+    border: 1.5px solid #a855f7; /* Tono morado idéntico a la imagen */
+    border-radius: 25px;
+    font-size: 13.5px;
+    color: #334155;
+    outline: none;
+    background-color: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formulario-datos input:focus,
+.formulario-datos select:focus {
+    border-color: #6b21a8;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+}
+
+/* Fila de Términos y Botón */
+.fila-acciones {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.check-terminos {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #475569;
+    cursor: pointer;
+}
+
+.check-terminos a {
+    color: #1a365d;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.btn-enviar {
+    background-color: #f05c06;
+    color: #ffffff;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(240, 92, 6, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-enviar:hover {
+    background-color: #d95305;
+    transform: translateY(-2px);
+}
+
+/*=================================================================
+                     SECCIÓN TITULACIONES
+=================================================================*/
+.seccion-titulaciones {
+    background-color: #ffffff;
+    padding: 50px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 2px solid #e2e8f0; /* Separador inferior sutil */
+}
+
+.seccion-titulaciones h2 {
+    color: #1a365d;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 35px;
+}
+
+.contenedor-titulaciones {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.tarjeta-titulacion {
+    background: linear-gradient(135deg, #180b2e 0%, #0d1238 50%, #0b1a3e 100%);
+    border-radius: 16px;
+    padding: 35px 30px;
+    width: 500px;
+    text-align: left;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.tarjeta-titulacion:hover {
+    transform: translateY(-4px);
+}
+
+.nivel-titulacion {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.nombre-programa {
+    color: #00f2fe; /* Tono cian neón brillante idéntico a la imagen */
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.info-resolucion p {
+    font-size: 12px;
+    color: #cbd5e1;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.btn-tarifa-titulacion {
+    display: inline-block;
+    align-self: flex-start;
+    background-color: #9d174d; /* Tono morado/fucsia de la imagen */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 25px;
+    border: 1px solid #be185d;
+    transition: background-color 0.3s ease;
+}
+
+.btn-tarifa-titulacion:hover {
+    background-color: #be185d;
+}
+
+/*=================================================================
+             SECCIÓN CONOCE TU FUTURO ACADÉMICO
+=================================================================*/
+.seccion-futuro {
+    background-color: #ffffff;
+    padding: 60px 40px;
+    max-width: 1150px;
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.seccion-futuro h2 {
+    color: #1a365d;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.futuro-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    text-align: left;
+}
+
+.futuro-texto {
+    flex: 1.2;
+}
+
+.futuro-texto p {
+    font-size: 14.5px;
+    color: #334155;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Formato de tarjeta vertical estilo YouTube Shorts */
+.futuro-multimedia {
+    flex: 0.8;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card-shorts {
+    width: 100%;
+    max-width: 340px;
+    height: 420px; /* Alto proporcionales a un vídeo vertical */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background-color: #000000;
+}
+
+.card-shorts iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/*=================================================================
+                       PIE DE PÁGINA (FOOTER)
+=================================================================*/
+.footer-principal {
+    background-color: #4a5568; /* Fondo gris oscuro característico de la imagen */
+    color: #ffffff;
+    padding: 50px 60px 20px 60px;
+    font-family: sans-serif;
+}
+
+.footer-contenido {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+/* Columna Izquierda */
+.footer-col-izquierda {
+    flex: 1.1;
+}
+
+.footer-logo {
+    max-width: 220px;
+    margin-bottom: 20px;
+    
+}
+
+.legal-info {
+    font-size: 11px;
+    color: #e2e8f0;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.legal-correo {
+    font-size: 11px;
+    color: #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.legal-correo a {
+    color: #f05c06; /* Naranja institucional para el correo de notificaciones */
+    text-decoration: underline;
+}
+
+/* Redes Sociales */
+.footer-redes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 20px;
+}
+
+.footer-redes span {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.iconos-redes {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-red {
+    background-color: #000000;
+    color: #ffffff;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Aspectos Legales */
+.footer-aspectos-legales h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.footer-aspectos-legales ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-aspectos-legales li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 6px;
+}
+
+.footer-aspectos-legales a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.footer-aspectos-legales a:hover {
+    color: #f05c06;
+}
+
+/* Caja Derecha (Gris Claro) */
+.footer-caja-derecha {
+    flex: 1.4;
+    background-color: #64748b; /* Tono de gris contrastante para la tarjeta */
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grid-sedes {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 15px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+    padding-bottom: 20px;
+}
+
+.sede-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.sede-item p {
+    font-size: 11px;
+    line-height: 1.3;
+    color: #f1f5f9;
+}
+
+.telefonos {
+    margin-top: 10px;
+}
+
+/* Certificaciones */
+.certificaciones-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.cert-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cert-badge {
+    background-color: #00bcd4;
+    color: #ffffff;
+    padding: 12px 10px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    width: 75px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cert-qm {
+    background-color: #ffffff;
+    color: #991b1b;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 10px;
+}
+
+/* Links Importantes (Inferior) */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: 40px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.titulo-links-importantes {
+    color: #f05c06; /* Color naranja institucional */
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: lowercase;
+    margin-bottom: 15px;
+}
+
+.links-inline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.links-inline a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 11.5px;
+    font-weight: 600;
+}
+
+.links-inline a:hover {
+    text-decoration: underline;
+}
+
+.btn-linea-etica {
+    background-color: #f05c06 !important;
+    color: #ffffff !important;
+    padding: 6px 16px;
+    border-radius: 15px;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+}
